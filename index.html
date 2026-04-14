@@ -167,14 +167,23 @@ async function cargarPedidos() {
     const rows = json.table.rows || [];
 
     const hoy = new Date();
-    const hoyStr = hoy.toISOString().split('T')[0];
+    const hoyAnio = hoy.getFullYear();
+    const hoyMes = hoy.getMonth();
+    const hoyDia = hoy.getDate();
 
     const pedidos = rows.filter(r => {
       if (!r.c || !r.c[1] || !r.c[1].v) return false;
       if (!r.c[0] || !r.c[0].v) return true;
       try {
-        const fechaPedido = new Date(r.c[0].v).toISOString().split('T')[0];
-        return fechaPedido === hoyStr;
+        const raw = r.c[0].v;
+        let d;
+        if (typeof raw === 'string' && raw.startsWith('Date(')) {
+          const parts = raw.replace('Date(','').replace(')','').split(',');
+          d = new Date(parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
+        } else {
+          d = new Date(raw);
+        }
+        return d.getFullYear() === hoyAnio && d.getMonth() === hoyMes && d.getDate() === hoyDia;
       } catch { return true; }
     }).map(r => ({
       fecha: r.c[0] ? r.c[0].v : '',
