@@ -166,7 +166,17 @@ async function cargarPedidos() {
     const json = JSON.parse(clean);
     const rows = json.table.rows || [];
 
-    const pedidos = rows.filter(r => r.c && r.c[1] && r.c[1].v).map(r => ({
+    const hoy = new Date();
+    const hoyStr = hoy.toISOString().split('T')[0];
+
+    const pedidos = rows.filter(r => {
+      if (!r.c || !r.c[1] || !r.c[1].v) return false;
+      if (!r.c[0] || !r.c[0].v) return true;
+      try {
+        const fechaPedido = new Date(r.c[0].v).toISOString().split('T')[0];
+        return fechaPedido === hoyStr;
+      } catch { return true; }
+    }).map(r => ({
       fecha: r.c[0] ? r.c[0].v : '',
       cliente: r.c[1] ? r.c[1].v : '',
       tipo: r.c[2] ? r.c[2].v : '',
