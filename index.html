@@ -4,65 +4,81 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pedidos — Pollos El Cantor</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { width: 100%; height: 100%; }
-  body { font-family: 'IBM Plex Sans', sans-serif; background: #080808; color: #fff; min-height: 100vh; }
-
-  .header { background: #0f0f0f; border-bottom: 2px solid #1a1a1a; padding: 18px 40px; display: flex; align-items: center; justify-content: space-between; }
-  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 38px; letter-spacing: 2px; color: #fff; line-height: 1; }
-  .logo span { color: #EF9F27; }
-  .live-row { display: flex; align-items: center; margin-top: 6px; }
-  .live-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #639922; margin-right: 8px; animation: blink 2s infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
-  .live-label { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #639922; text-transform: uppercase; letter-spacing: 1px; }
-  .hora { font-family: 'IBM Plex Mono', monospace; font-size: 36px; font-weight: 600; color: #fff; line-height: 1; text-align: right; }
-  .fecha-txt { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #444; margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; text-align: right; }
-
-  .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; padding: 20px 40px; }
-  .stat { background: #111; border: 1px solid #1f1f1f; border-radius: 10px; padding: 16px 20px; position: relative; overflow: hidden; }
-  .stat::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-  .stat.total::before { background: #444; }
-  .stat.urgente::before { background: #E24B4A; }
-  .stat.cam1::before { background: #378ADD; }
-  .stat.cam2::before { background: #1D9E75; }
-  .stat.cam3::before { background: #EF9F27; }
-  .stat .label { font-size: 11px; color: #555; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; font-family: 'IBM Plex Mono', monospace; }
-  .stat .value { font-family: 'Bebas Neue', sans-serif; font-size: 48px; line-height: 1; color: #fff; }
-  .stat .sublabel { font-size: 11px; color: #333; margin-top: 4px; font-family: 'IBM Plex Mono', monospace; }
-  .stat.urgente .value { color: #E24B4A; }
-  .stat.cam1 .value { color: #378ADD; }
-  .stat.cam2 .value { color: #1D9E75; }
-  .stat.cam3 .value { color: #EF9F27; }
-
-  .section-title { padding: 0 40px 12px; font-size: 11px; color: #333; text-transform: uppercase; letter-spacing: 2px; font-family: 'IBM Plex Mono', monospace; display: flex; align-items: center; gap: 12px; }
-  .section-title::after { content: ''; flex: 1; height: 1px; background: #1a1a1a; }
-
-  .table-wrap { padding: 0 40px 40px; }
-  table { width: 100%; border-collapse: collapse; table-layout: fixed; }
-  thead tr { border-bottom: 2px solid #1a1a1a; }
-  th { color: #333; font-size: 11px; font-weight: 500; padding: 10px 14px; text-align: left; text-transform: uppercase; letter-spacing: 1.5px; font-family: 'IBM Plex Mono', monospace; }
-  tbody tr { border-bottom: 1px solid #111; }
-  tbody tr:hover { background: #0f0f0f; }
-  td { padding: 15px 14px; font-size: 17px; color: #aaa; }
-  .td-cliente { font-weight: 600; color: #fff; font-size: 19px; }
-  .td-tipo { color: #777; font-size: 16px; }
-  .td-cantidad { font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: #fff; font-size: 20px; }
-  .td-dir { color: #444; font-size: 13px; font-family: 'IBM Plex Mono', monospace; }
-  .td-hora { color: #333; font-size: 13px; font-family: 'IBM Plex Mono', monospace; }
-
-  .badge { display: inline-block; font-size: 11px; padding: 4px 12px; border-radius: 4px; font-weight: 600; font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: 0.5px; }
-  .badge.urgente { background: #1f0808; color: #E24B4A; border: 1px solid #3d1010; }
-  .badge.normal { background: #081208; color: #639922; border: 1px solid #102010; }
-
-  .cam { display: inline-block; font-size: 12px; padding: 4px 14px; border-radius: 4px; font-weight: 600; font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; }
-  .cam-1 { background: #071525; color: #378ADD; border: 1px solid #0f2540; }
-  .cam-2 { background: #071510; color: #1D9E75; border: 1px solid #0f2820; }
-  .cam-3 { background: #151005; color: #EF9F27; border: 1px solid #2a1e05; }
-  .cam-x { background: #151515; color: #555; border: 1px solid #222; }
-
-  .loading { text-align: center; padding: 5rem; color: #222; font-family: 'IBM Plex Mono', monospace; font-size: 16px; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; min-height: 100vh; }
+body { font-family: 'IBM Plex Sans', sans-serif; background: #080808; color: #fff; }
+.header { background: #0f0f0f; border-bottom: 2px solid #1a1a1a; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-family: 'IBM Plex Sans', sans-serif; font-size: 32px; font-weight: 700; letter-spacing: 2px; color: #fff; line-height: 1; }
+.logo span { color: #EF9F27; }
+.live-row { display: flex; align-items: center; margin-top: 6px; }
+.live-dot { width: 7px; height: 7px; border-radius: 50%; background: #639922; margin-right: 7px; animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+.live-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #639922; text-transform: uppercase; letter-spacing: 1px; }
+.hora { font-family: 'IBM Plex Mono', monospace; font-size: 32px; font-weight: 600; color: #fff; line-height: 1; text-align: right; }
+.fecha-txt { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #444; margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; text-align: right; }
+.stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; padding: 16px 32px; }
+.stat { background: #111; border: 1px solid #1f1f1f; border-radius: 10px; padding: 14px 18px; position: relative; overflow: hidden; }
+.stat::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.stat.total::before { background: #444; }
+.stat.urg::before { background: #E24B4A; }
+.stat.c1::before { background: #378ADD; }
+.stat.c2::before { background: #1D9E75; }
+.stat.c3::before { background: #EF9F27; }
+.stat .slabel { font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; font-family: 'IBM Plex Mono', monospace; }
+.stat .sval { font-family: 'IBM Plex Mono', monospace; font-size: 42px; font-weight: 600; line-height: 1; color: #fff; }
+.stat .ssub { font-size: 10px; color: #333; margin-top: 4px; font-family: 'IBM Plex Mono', monospace; }
+.stat.urg .sval { color: #E24B4A; }
+.stat.c1 .sval { color: #378ADD; }
+.stat.c2 .sval { color: #1D9E75; }
+.stat.c3 .sval { color: #EF9F27; }
+.section-title { padding: 0 32px 10px; font-size: 10px; color: #333; text-transform: uppercase; letter-spacing: 2px; font-family: 'IBM Plex Mono', monospace; display: flex; align-items: center; gap: 12px; }
+.section-title::after { content: ''; flex: 1; height: 1px; background: #1a1a1a; }
+.table-wrap { padding: 0 32px 16px; }
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+thead tr { border-bottom: 2px solid #1a1a1a; }
+th { color: #333; font-size: 10px; font-weight: 500; padding: 8px 12px; text-align: left; text-transform: uppercase; letter-spacing: 1.5px; font-family: 'IBM Plex Mono', monospace; }
+tbody tr { border-bottom: 1px solid #111; }
+tbody tr:hover { background: #0f0f0f; }
+td { padding: 12px 12px; font-size: 15px; color: #aaa; }
+.td-cli { font-weight: 600; color: #fff; font-size: 16px; }
+.td-tipo { color: #666; font-size: 14px; }
+.td-cant { font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: #fff; font-size: 18px; }
+.td-hora { color: #333; font-size: 12px; font-family: 'IBM Plex Mono', monospace; }
+.td-dir { color: #444; font-size: 12px; font-family: 'IBM Plex Mono', monospace; }
+.badge { display: inline-block; font-size: 10px; padding: 3px 10px; border-radius: 4px; font-weight: 600; font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: 0.5px; }
+.badge.urg { background: #1f0808; color: #E24B4A; border: 1px solid #3d1010; }
+.badge.norm { background: #081208; color: #639922; border: 1px solid #102010; }
+.cam { display: inline-block; font-size: 11px; padding: 3px 12px; border-radius: 4px; font-weight: 600; font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; }
+.cam-1 { background: #071525; color: #378ADD; border: 1px solid #0f2540; }
+.cam-2 { background: #071510; color: #1D9E75; border: 1px solid #0f2820; }
+.cam-3 { background: #151005; color: #EF9F27; border: 1px solid #2a1e05; }
+.cam-x { background: #151515; color: #555; border: 1px solid #222; }
+.trucks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 0 32px 32px; }
+.truck-card { background: #0f0f0f; border: 1px solid #1a1a1a; border-radius: 10px; padding: 14px; }
+.truck-hdr { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+.truck-name { font-size: 13px; font-weight: 500; color: #fff; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.5px; }
+.zbadge { font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
+.z1 { background: #071525; color: #378ADD; }
+.z2 { background: #071510; color: #1D9E75; }
+.z3 { background: #151005; color: #EF9F27; }
+.truck-count { font-size: 10px; color: #444; font-family: 'IBM Plex Mono', monospace; margin-bottom: 8px; }
+.door-lbl { font-size: 9px; color: #333; text-align: center; margin-bottom: 6px; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.5px; }
+.cgrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; }
+.can { border-radius: 3px; padding: 2px; text-align: center; min-height: 36px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid transparent; }
+.can.cu { background: #1f0808; border-color: #3d1010; }
+.can.cn { background: #071525; border-color: #0f2540; }
+.can.cv { background: transparent; border: 1px dashed #1a1a1a; }
+.can .cn2 { font-size: 12px; font-weight: 600; font-family: 'IBM Plex Mono', monospace; }
+.can.cu .cn2 { color: #E24B4A; }
+.can.cn .cn2 { color: #378ADD; }
+.can.cv .cn2 { color: #1a1a1a; font-size: 10px; }
+.can .ccli { font-size: 7px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
+.can.cu .ccli { color: #712B13; }
+.can.cn .ccli { color: #185FA5; }
+.fondo-lbl { font-size: 9px; color: #333; text-align: center; margin-top: 6px; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.5px; }
+.loading { text-align: center; padding: 3rem; color: #333; font-family: 'IBM Plex Mono', monospace; font-size: 14px; }
 </style>
 </head>
 <body>
@@ -82,65 +98,55 @@
 </div>
 
 <div class="stats">
-  <div class="stat total">
-    <div class="label">Total pedidos</div>
-    <div class="value" id="total">—</div>
-    <div class="sublabel">del dia</div>
-  </div>
-  <div class="stat urgente">
-    <div class="label">Urgentes</div>
-    <div class="value" id="urgentes">—</div>
-    <div class="sublabel">prioridad alta</div>
-  </div>
-  <div class="stat cam1">
-    <div class="label">Camión 1</div>
-    <div class="value" id="c1">—</div>
-    <div class="sublabel">zona norte</div>
-  </div>
-  <div class="stat cam2">
-    <div class="label">Camión 2</div>
-    <div class="value" id="c2">—</div>
-    <div class="sublabel">zona sur</div>
-  </div>
-  <div class="stat cam3">
-    <div class="label">Camión 3</div>
-    <div class="value" id="c3">—</div>
-    <div class="sublabel">zona centro</div>
-  </div>
+  <div class="stat total"><div class="slabel">Total pedidos</div><div class="sval" id="total">—</div><div class="ssub">del dia</div></div>
+  <div class="stat urg"><div class="slabel">Urgentes</div><div class="sval" id="urgentes">—</div><div class="ssub">prioridad alta</div></div>
+  <div class="stat c1"><div class="slabel">Camión 1</div><div class="sval" id="c1">—</div><div class="ssub">zona norte</div></div>
+  <div class="stat c2"><div class="slabel">Camión 2</div><div class="sval" id="c2">—</div><div class="ssub">zona sur</div></div>
+  <div class="stat c3"><div class="slabel">Camión 3</div><div class="sval" id="c3">—</div><div class="ssub">zona centro</div></div>
 </div>
 
 <div class="section-title">Pedidos del dia</div>
-
 <div class="table-wrap">
   <table>
-    <thead>
-      <tr>
-        <th style="width:18%">Cliente</th>
-        <th style="width:17%">Tipo de pollo</th>
-        <th style="width:9%">Cantidad</th>
-        <th style="width:11%">Urgencia</th>
-        <th style="width:13%">Camión</th>
-        <th style="width:20%">Dirección</th>
-        <th style="width:12%">Hora</th>
-      </tr>
-    </thead>
-    <tbody id="tbody">
-      <tr><td colspan="7" class="loading">Cargando pedidos...</td></tr>
-    </tbody>
+    <thead><tr>
+      <th style="width:18%">Cliente</th>
+      <th style="width:16%">Tipo de pollo</th>
+      <th style="width:8%">Cant.</th>
+      <th style="width:11%">Urgencia</th>
+      <th style="width:13%">Camión</th>
+      <th style="width:20%">Dirección</th>
+      <th style="width:14%">Hora</th>
+    </tr></thead>
+    <tbody id="tbody"><tr><td colspan="7" class="loading">Cargando pedidos...</td></tr></tbody>
   </table>
 </div>
+
+<div class="section-title">Organización de canastas por camión</div>
+<div class="trucks-grid" id="trucks"><div class="loading">Cargando...</div></div>
 
 <script>
 const SHEET_ID = '1KWpAYhScVq3CNGSzuxcf2XbZZMqx2QaSAZnTillrTnM';
 const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Hoja1`;
+const CAP = 50;
+
+const CAMS = {
+  '1': { label: 'Camión 1', zona: 'Norte', zc: 'z1', pedidos: [] },
+  '2': { label: 'Camión 2', zona: 'Sur', zc: 'z2', pedidos: [] },
+  '3': { label: 'Camión 3', zona: 'Centro', zc: 'z3', pedidos: [] }
+};
+
+function getCam(cam) {
+  if (!cam) return null;
+  const c = cam.toString().toUpperCase().replace(/[^A-Z0-9]/g, '');
+  if (c.includes('3')) return '3';
+  if (c.includes('2')) return '2';
+  if (c.includes('1')) return '1';
+  return null;
+}
 
 function camClass(cam) {
-  if (!cam) return 'cam-x';
-  const c = cam.toString().toUpperCase().replace(/[^A-Z0-9]/g, '');
-  if (c.includes('3')) return 'cam-3';
-  if (c.includes('2')) return 'cam-2';
-  if (c.includes('1')) return 'cam-1';
-  return 'cam-x';
+  const n = getCam(cam);
+  return n ? `cam-${n}` : 'cam-x';
 }
 
 function formatHora(raw) {
@@ -155,10 +161,11 @@ function formatHora(raw) {
 function actualizarHora() {
   const now = new Date();
   document.getElementById('hora').textContent = now.toLocaleTimeString('es-CO', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
-  document.getElementById('fecha').textContent = now.toLocaleDateString('es-CO', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+  document.getElementById('fecha').textContent = now.toLocaleDateString('es-CO', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
 }
 
-async function cargarPedidos() {
+async function cargar() {
+  const hoy = new Date();
   try {
     const res = await fetch(URL + '&_=' + Date.now());
     const text = await res.text();
@@ -166,46 +173,42 @@ async function cargarPedidos() {
     const json = JSON.parse(clean);
     const rows = json.table.rows || [];
 
-    const hoy = new Date();
-    const hoyAnio = hoy.getFullYear();
-    const hoyMes = hoy.getMonth();
-    const hoyDia = hoy.getDate();
-
     const pedidos = rows.filter(r => {
       if (!r.c || !r.c[1] || !r.c[1].v) return false;
       if (!r.c[0] || !r.c[0].v) return true;
       try {
-        const raw = r.c[0].v;
-        let d;
-        if (typeof raw === 'string' && raw.startsWith('Date(')) {
-          const parts = raw.replace('Date(','').replace(')','').split(',');
-          d = new Date(parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
-        } else {
-          d = new Date(raw);
-        }
-        return d.getFullYear() === hoyAnio && d.getMonth() === hoyMes && d.getDate() === hoyDia;
+        const d = new Date(r.c[0].v);
+        return d.getFullYear() === hoy.getFullYear() && d.getMonth() === hoy.getMonth() && d.getDate() === hoy.getDate();
       } catch { return true; }
     }).map(r => ({
       fecha: r.c[0] ? r.c[0].v : '',
       cliente: r.c[1] ? r.c[1].v : '',
       tipo: r.c[2] ? r.c[2].v : '',
-      cantidad: r.c[3] ? r.c[3].v : '',
+      cantidad: r.c[3] ? Math.round(r.c[3].v) : 1,
       urgencia: r.c[4] ? r.c[4].v : '',
       camion: r.c[5] ? r.c[5].v : '',
       direccion: r.c[6] ? r.c[6].v : ''
     }));
 
+    const urgSort = (a, b) => {
+      const au = a.urgencia && a.urgencia.toUpperCase().includes('URG') ? 0 : 1;
+      const bu = b.urgencia && b.urgencia.toUpperCase().includes('URG') ? 0 : 1;
+      return au - bu;
+    };
+
+    const sorted = [...pedidos].sort(urgSort);
+
     const tbody = document.getElementById('tbody');
-    if (pedidos.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="7" class="loading">Sin pedidos registrados hoy</td></tr>';
+    if (sorted.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="7" class="loading">Sin pedidos hoy</td></tr>';
     } else {
-      tbody.innerHTML = pedidos.map(p => {
-        const esUrgente = p.urgencia && p.urgencia.toUpperCase().includes('URG');
+      tbody.innerHTML = sorted.map(p => {
+        const urg = p.urgencia && p.urgencia.toUpperCase().includes('URG');
         return `<tr>
-          <td class="td-cliente">${p.cliente}</td>
+          <td class="td-cli">${p.cliente}</td>
           <td class="td-tipo">${p.tipo}</td>
-          <td class="td-cantidad">${p.cantidad}</td>
-          <td><span class="badge ${esUrgente ? 'urgente' : 'normal'}">${p.urgencia || 'Normal'}</span></td>
+          <td class="td-cant">${p.cantidad}</td>
+          <td><span class="badge ${urg ? 'urg' : 'norm'}">${p.urgencia || 'Normal'}</span></td>
           <td><span class="cam ${camClass(p.camion)}">${p.camion || '—'}</span></td>
           <td class="td-dir">${p.direccion || '—'}</td>
           <td class="td-hora">${formatHora(p.fecha)}</td>
@@ -213,26 +216,65 @@ async function cargarPedidos() {
       }).join('');
     }
 
-    const urgentes = pedidos.filter(p => p.urgencia && p.urgencia.toUpperCase().includes('URG')).length;
-    const c1 = pedidos.filter(p => camClass(p.camion) === 'cam-1').length;
-    const c2 = pedidos.filter(p => camClass(p.camion) === 'cam-2').length;
-    const c3 = pedidos.filter(p => camClass(p.camion) === 'cam-3').length;
-
     document.getElementById('total').textContent = pedidos.length;
-    document.getElementById('urgentes').textContent = urgentes;
-    document.getElementById('c1').textContent = c1;
-    document.getElementById('c2').textContent = c2;
-    document.getElementById('c3').textContent = c3;
+    document.getElementById('urgentes').textContent = pedidos.filter(p => p.urgencia && p.urgencia.toUpperCase().includes('URG')).length;
+    document.getElementById('c1').textContent = pedidos.filter(p => getCam(p.camion) === '1').length;
+    document.getElementById('c2').textContent = pedidos.filter(p => getCam(p.camion) === '2').length;
+    document.getElementById('c3').textContent = pedidos.filter(p => getCam(p.camion) === '3').length;
     document.getElementById('ultima').textContent = 'Actualizado ' + new Date().toLocaleTimeString('es-CO');
+
+    Object.values(CAMS).forEach(c => c.pedidos = []);
+    sorted.forEach(p => {
+      const n = getCam(p.camion);
+      if (n) CAMS[n].pedidos.push(p);
+    });
+
+    renderTrucks();
   } catch(e) {
-    document.getElementById('ultima').textContent = 'Error de conexion — reintentando...';
+    document.getElementById('ultima').textContent = 'Error de conexion';
   }
+}
+
+function renderTrucks() {
+  const container = document.getElementById('trucks');
+  container.innerHTML = '';
+  Object.entries(CAMS).forEach(([num, cam]) => {
+    const sec = document.createElement('div');
+    sec.className = 'truck-card';
+    sec.innerHTML = `
+      <div class="truck-hdr">
+        <span class="truck-name">${cam.label}</span>
+        <span class="zbadge ${cam.zc}">Zona ${cam.zona}</span>
+      </div>
+      <div class="truck-count">${cam.pedidos.length} pedidos · ${Math.min(cam.pedidos.length, CAP)} / ${CAP} canastas</div>
+      <div class="door-lbl">← PUERTA (primera entrega)</div>
+    `;
+    const grid = document.createElement('div');
+    grid.className = 'cgrid';
+    for (let i = 0; i < CAP; i++) {
+      const p = cam.pedidos[i];
+      const c = document.createElement('div');
+      if (p) {
+        const u = p.urgencia && p.urgencia.toUpperCase().includes('URG');
+        c.className = `can ${u ? 'cu' : 'cn'}`;
+        const nom = p.cliente.length > 5 ? p.cliente.substring(0, 5) : p.cliente;
+        c.innerHTML = `<span class="cn2">${i+1}</span><span class="ccli">${nom}</span>`;
+      } else {
+        c.className = 'can cv';
+        c.innerHTML = `<span class="cn2">—</span>`;
+      }
+      grid.appendChild(c);
+    }
+    sec.appendChild(grid);
+    sec.innerHTML += `<div class="fondo-lbl">FONDO (última entrega) →</div>`;
+    container.appendChild(sec);
+  });
 }
 
 actualizarHora();
 setInterval(actualizarHora, 1000);
-cargarPedidos();
-setInterval(cargarPedidos, 30000);
+cargar();
+setInterval(cargar, 30000);
 </script>
 </body>
 </html>
