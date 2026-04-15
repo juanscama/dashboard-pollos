@@ -67,10 +67,6 @@ body { font-family: 'IBM Plex Sans', sans-serif; background: #f5f4f0; min-height
 
 .success-msg { display: none; background: #EAF3DE; border: 1px solid #97C459; border-radius: 10px; padding: 16px; text-align: center; color: #3B6D11; font-weight: 600; margin-top: 12px; }
 .error-msg { display: none; background: #FCEBEB; border: 1px solid #F09595; border-radius: 10px; padding: 14px; text-align: center; color: #A32D2D; font-size: 14px; margin-top: 12px; }
-
-.tipos-pollo { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px; }
-.tipo-btn { padding: 8px 10px; border: 1.5px solid #e0ddd6; border-radius: 8px; background: #fafaf8; color: #888; font-size: 12px; font-family: 'IBM Plex Mono', monospace; cursor: pointer; text-align: center; transition: all 0.15s; }
-.tipo-btn.selected { border-color: #1a1a1a; background: #1a1a1a; color: #fff; }
 </style>
 </head>
 <body>
@@ -146,11 +142,11 @@ body { font-family: 'IBM Plex Sans', sans-serif; background: #f5f4f0; min-height
 const WEBHOOK = 'https://hook.us2.make.com/qqm09k9uzv9n9o5us4fo62hplbpgvgh8';
 
 const CLIENTES = {
-  'LAURA': { dir: 'Carrera 65 No.169A-55 Bogota', zona: 'norte' },
-  'SEBASTIAN': { dir: 'Calle 80 No.23-15 Bogota', zona: 'norte' },
-  'CAMILO': { dir: 'Carrera 78 No.38-20 Kennedy Bogota', zona: 'sur' },
-  'JUAN': { dir: 'Calle 22A Sur No.8-52 Bogota', zona: 'sur' },
-  'PEDRO': { dir: 'Carrera 99 No.25-10 Fontibon Bogota', zona: 'centro' }
+  'LAURA':     { dir: 'Carrera 65 No.169A-55 Bogota',      zona: 'norte'  },
+  'SEBASTIAN': { dir: 'Carrera 14b No.148-56 Bogota',      zona: 'norte'  },
+  'CAMILO':    { dir: 'Calle 38A Sur No.34d-51 Bogota',    zona: 'sur'    },
+  'JUAN':      { dir: 'Calle 30 Sur No.50A-64 Bogota',     zona: 'sur'    },
+  'PEDRO':     { dir: 'Carrera 11 No.82-71 Bogota',        zona: 'centro' }
 };
 
 let pedidos = [];
