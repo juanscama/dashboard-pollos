@@ -279,9 +279,9 @@ async function enviarPedidos() {
   try {
     const res = await fetch(WEBHOOK, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      headers: { 'Content-Type': 'application/json' },
       mode: 'no-cors',
-      body: `pedidos=${encodeURIComponent(texto)}`
+      body: JSON.stringify({ pedidos: texto })
     });
     if (res.ok || res.type === 'opaque') {
       success.style.display = 'block';
