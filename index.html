@@ -10,7 +10,7 @@
 html, body { width: 100%; min-height: 100vh; }
 body { font-family: 'IBM Plex Sans', sans-serif; background: #080808; color: #fff; }
 .header { background: #0f0f0f; border-bottom: 2px solid #1a1a1a; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
-.logo { font-family: 'IBM Plex Sans', sans-serif; font-size: 32px; font-weight: 700; letter-spacing: 2px; color: #fff; line-height: 1; }
+.logo { font-size: 32px; font-weight: 700; letter-spacing: 2px; color: #fff; line-height: 1; }
 .logo span { color: #EF9F27; }
 .live-row { display: flex; align-items: center; margin-top: 6px; }
 .live-dot { width: 7px; height: 7px; border-radius: 50%; background: #639922; margin-right: 7px; animation: blink 2s infinite; }
@@ -40,14 +40,12 @@ table { width: 100%; border-collapse: collapse; table-layout: fixed; }
 thead tr { border-bottom: 2px solid #1a1a1a; }
 th { color: #333; font-size: 10px; font-weight: 500; padding: 8px 12px; text-align: left; text-transform: uppercase; letter-spacing: 1.5px; font-family: 'IBM Plex Mono', monospace; }
 tbody tr { border-bottom: 1px solid #111; }
-tbody tr:hover { background: #0f0f0f; }
-td { padding: 12px 12px; font-size: 15px; color: #aaa; }
-.td-cli { font-weight: 600; color: #fff; font-size: 16px; }
-.td-tipo { color: #666; font-size: 14px; }
-.td-cant { font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: #fff; font-size: 18px; }
+tbody tr:hover td { background: #0d0d0d; }
+td { padding: 12px 12px; font-size: 15px; color: #aaa; vertical-align: top; }
+.td-cli { font-weight: 600; color: #fff; font-size: 17px; }
 .td-hora { color: #333; font-size: 12px; font-family: 'IBM Plex Mono', monospace; }
 .td-dir { color: #444; font-size: 12px; font-family: 'IBM Plex Mono', monospace; }
-.badge { display: inline-block; font-size: 10px; padding: 3px 10px; border-radius: 4px; font-weight: 600; font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: 0.5px; }
+.badge { display: inline-block; font-size: 10px; padding: 3px 10px; border-radius: 4px; font-weight: 600; font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; }
 .badge.urg { background: #1f0808; color: #E24B4A; border: 1px solid #3d1010; }
 .badge.norm { background: #081208; color: #639922; border: 1px solid #102010; }
 .cam { display: inline-block; font-size: 11px; padding: 3px 12px; border-radius: 4px; font-weight: 600; font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; }
@@ -55,16 +53,22 @@ td { padding: 12px 12px; font-size: 15px; color: #aaa; }
 .cam-2 { background: #071510; color: #1D9E75; border: 1px solid #0f2820; }
 .cam-3 { background: #151005; color: #EF9F27; border: 1px solid #2a1e05; }
 .cam-x { background: #151515; color: #555; border: 1px solid #222; }
+.productos-list { list-style: none; padding: 0; margin: 0; }
+.productos-list li { display: flex; align-items: center; gap: 8px; padding: 3px 0; font-size: 14px; color: #888; border-bottom: 1px solid #111; }
+.productos-list li:last-child { border-bottom: none; }
+.prod-cant { font-family: 'IBM Plex Mono', monospace; font-weight: 600; color: #fff; font-size: 15px; min-width: 32px; }
+.prod-tipo { color: #777; }
+.prod-dot { width: 4px; height: 4px; border-radius: 50%; background: #333; flex-shrink: 0; }
 .trucks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding: 0 32px 32px; }
 .truck-card { background: #0f0f0f; border: 1px solid #1a1a1a; border-radius: 10px; padding: 14px; }
 .truck-hdr { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
-.truck-name { font-size: 13px; font-weight: 500; color: #fff; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.5px; }
+.truck-name { font-size: 13px; font-weight: 500; color: #fff; font-family: 'IBM Plex Mono', monospace; }
 .zbadge { font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
 .z1 { background: #071525; color: #378ADD; }
 .z2 { background: #071510; color: #1D9E75; }
 .z3 { background: #151005; color: #EF9F27; }
 .truck-count { font-size: 10px; color: #444; font-family: 'IBM Plex Mono', monospace; margin-bottom: 8px; }
-.door-lbl { font-size: 9px; color: #333; text-align: center; margin-bottom: 6px; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.5px; }
+.door-lbl { font-size: 9px; color: #333; text-align: center; margin-bottom: 6px; font-family: 'IBM Plex Mono', monospace; }
 .cgrid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; }
 .can { border-radius: 3px; padding: 2px; text-align: center; min-height: 36px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid transparent; }
 .can.cu { background: #1f0808; border-color: #3d1010; }
@@ -77,7 +81,7 @@ td { padding: 12px 12px; font-size: 15px; color: #aaa; }
 .can .ccli { font-size: 7px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
 .can.cu .ccli { color: #712B13; }
 .can.cn .ccli { color: #185FA5; }
-.fondo-lbl { font-size: 9px; color: #333; text-align: center; margin-top: 6px; font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.5px; }
+.fondo-lbl { font-size: 9px; color: #333; text-align: center; margin-top: 6px; font-family: 'IBM Plex Mono', monospace; }
 .loading { text-align: center; padding: 3rem; color: #333; font-family: 'IBM Plex Mono', monospace; font-size: 14px; }
 </style>
 </head>
@@ -98,7 +102,7 @@ td { padding: 12px 12px; font-size: 15px; color: #aaa; }
 </div>
 
 <div class="stats">
-  <div class="stat total"><div class="slabel">Total pedidos</div><div class="sval" id="total">—</div><div class="ssub">del dia</div></div>
+  <div class="stat total"><div class="slabel">Total clientes</div><div class="sval" id="total">—</div><div class="ssub">del dia</div></div>
   <div class="stat urg"><div class="slabel">Urgentes</div><div class="sval" id="urgentes">—</div><div class="ssub">prioridad alta</div></div>
   <div class="stat c1"><div class="slabel">Camión 1</div><div class="sval" id="c1">—</div><div class="ssub">zona norte</div></div>
   <div class="stat c2"><div class="slabel">Camión 2</div><div class="sval" id="c2">—</div><div class="ssub">zona sur</div></div>
@@ -110,14 +114,13 @@ td { padding: 12px 12px; font-size: 15px; color: #aaa; }
   <table>
     <thead><tr>
       <th style="width:18%">Cliente</th>
-      <th style="width:16%">Tipo de pollo</th>
-      <th style="width:8%">Cant.</th>
+      <th style="width:28%">Productos</th>
       <th style="width:11%">Urgencia</th>
       <th style="width:13%">Camión</th>
-      <th style="width:20%">Dirección</th>
-      <th style="width:14%">Hora</th>
+      <th style="width:18%">Dirección</th>
+      <th style="width:12%">Hora</th>
     </tr></thead>
-    <tbody id="tbody"><tr><td colspan="7" class="loading">Cargando pedidos...</td></tr></tbody>
+    <tbody id="tbody"><tr><td colspan="6" class="loading">Cargando pedidos...</td></tr></tbody>
   </table>
 </div>
 
@@ -130,9 +133,9 @@ const URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:
 const CAP = 50;
 
 const CAMS = {
-  '1': { label: 'Camión 1', zona: 'Norte', zc: 'z1', pedidos: [] },
-  '2': { label: 'Camión 2', zona: 'Sur', zc: 'z2', pedidos: [] },
-  '3': { label: 'Camión 3', zona: 'Centro', zc: 'z3', pedidos: [] }
+  '1': { label: 'Camión 1', zona: 'Norte', zc: 'z1', clientes: [] },
+  '2': { label: 'Camión 2', zona: 'Sur', zc: 'z2', clientes: [] },
+  '3': { label: 'Camión 3', zona: 'Centro', zc: 'z3', clientes: [] }
 };
 
 function getCam(cam) {
@@ -173,7 +176,7 @@ async function cargar() {
     const json = JSON.parse(clean);
     const rows = json.table.rows || [];
 
-    const pedidos = rows.filter(r => {
+    const filas = rows.filter(r => {
       if (!r.c || !r.c[1] || !r.c[1].v) return false;
       if (!r.c[0] || !r.c[0].v) return true;
       try {
@@ -182,7 +185,7 @@ async function cargar() {
       } catch { return true; }
     }).map(r => ({
       fecha: r.c[0] ? r.c[0].v : '',
-      cliente: r.c[1] ? r.c[1].v : '',
+      cliente: r.c[1] ? r.c[1].v.trim() : '',
       tipo: r.c[2] ? r.c[2].v : '',
       cantidad: r.c[3] ? Math.round(r.c[3].v) : 1,
       urgencia: r.c[4] ? r.c[4].v : '',
@@ -190,43 +193,64 @@ async function cargar() {
       direccion: r.c[6] ? r.c[6].v : ''
     }));
 
-    const urgSort = (a, b) => {
+    const clientesMap = {};
+    filas.forEach(f => {
+      const key = f.cliente.toUpperCase();
+      if (!clientesMap[key]) {
+        clientesMap[key] = {
+          cliente: f.cliente,
+          productos: [],
+          urgencia: f.urgencia,
+          camion: f.camion,
+          direccion: f.direccion,
+          fecha: f.fecha
+        };
+      }
+      clientesMap[key].productos.push({ tipo: f.tipo, cantidad: f.cantidad });
+      if (f.urgencia && f.urgencia.toUpperCase().includes('URG')) {
+        clientesMap[key].urgencia = f.urgencia;
+      }
+    });
+
+    const clientes = Object.values(clientesMap);
+    clientes.sort((a, b) => {
       const au = a.urgencia && a.urgencia.toUpperCase().includes('URG') ? 0 : 1;
       const bu = b.urgencia && b.urgencia.toUpperCase().includes('URG') ? 0 : 1;
       return au - bu;
-    };
-
-    const sorted = [...pedidos].sort(urgSort);
+    });
 
     const tbody = document.getElementById('tbody');
-    if (sorted.length === 0) {
-      tbody.innerHTML = '<tr><td colspan="7" class="loading">Sin pedidos hoy</td></tr>';
+    if (clientes.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="6" class="loading">Sin pedidos hoy</td></tr>';
     } else {
-      tbody.innerHTML = sorted.map(p => {
-        const urg = p.urgencia && p.urgencia.toUpperCase().includes('URG');
+      tbody.innerHTML = clientes.map(c => {
+        const urg = c.urgencia && c.urgencia.toUpperCase().includes('URG');
+        const productosHTML = c.productos.map(p =>
+          `<li><span class="prod-cant">${p.cantidad}</span><span class="prod-dot"></span><span class="prod-tipo">${p.tipo}</span></li>`
+        ).join('');
         return `<tr>
-          <td class="td-cli">${p.cliente}</td>
-          <td class="td-tipo">${p.tipo}</td>
-          <td class="td-cant">${p.cantidad}</td>
-          <td><span class="badge ${urg ? 'urg' : 'norm'}">${p.urgencia || 'Normal'}</span></td>
-          <td><span class="cam ${camClass(p.camion)}">${p.camion || '—'}</span></td>
-          <td class="td-dir">${p.direccion || '—'}</td>
-          <td class="td-hora">${formatHora(p.fecha)}</td>
+          <td class="td-cli">${c.cliente}</td>
+          <td><ul class="productos-list">${productosHTML}</ul></td>
+          <td><span class="badge ${urg ? 'urg' : 'norm'}">${c.urgencia || 'Normal'}</span></td>
+          <td><span class="cam ${camClass(c.camion)}">${c.camion || '—'}</span></td>
+          <td class="td-dir">${c.direccion || '—'}</td>
+          <td class="td-hora">${formatHora(c.fecha)}</td>
         </tr>`;
       }).join('');
     }
 
-    document.getElementById('total').textContent = pedidos.length;
-    document.getElementById('urgentes').textContent = pedidos.filter(p => p.urgencia && p.urgencia.toUpperCase().includes('URG')).length;
-    document.getElementById('c1').textContent = pedidos.filter(p => getCam(p.camion) === '1').length;
-    document.getElementById('c2').textContent = pedidos.filter(p => getCam(p.camion) === '2').length;
-    document.getElementById('c3').textContent = pedidos.filter(p => getCam(p.camion) === '3').length;
+    const urgCount = clientes.filter(c => c.urgencia && c.urgencia.toUpperCase().includes('URG')).length;
+    document.getElementById('total').textContent = clientes.length;
+    document.getElementById('urgentes').textContent = urgCount;
+    document.getElementById('c1').textContent = clientes.filter(c => getCam(c.camion) === '1').length;
+    document.getElementById('c2').textContent = clientes.filter(c => getCam(c.camion) === '2').length;
+    document.getElementById('c3').textContent = clientes.filter(c => getCam(c.camion) === '3').length;
     document.getElementById('ultima').textContent = 'Actualizado ' + new Date().toLocaleTimeString('es-CO');
 
-    Object.values(CAMS).forEach(c => c.pedidos = []);
-    sorted.forEach(p => {
-      const n = getCam(p.camion);
-      if (n) CAMS[n].pedidos.push(p);
+    Object.values(CAMS).forEach(c => c.clientes = []);
+    clientes.forEach(c => {
+      const n = getCam(c.camion);
+      if (n) CAMS[n].clientes.push(c);
     });
 
     renderTrucks();
@@ -246,24 +270,24 @@ function renderTrucks() {
         <span class="truck-name">${cam.label}</span>
         <span class="zbadge ${cam.zc}">Zona ${cam.zona}</span>
       </div>
-      <div class="truck-count">${cam.pedidos.length} pedidos · ${Math.min(cam.pedidos.length, CAP)} / ${CAP} canastas</div>
+      <div class="truck-count">${cam.clientes.length} clientes · ${Math.min(cam.clientes.length, CAP)} / ${CAP} canastas</div>
       <div class="door-lbl">← PUERTA (primera entrega)</div>
     `;
     const grid = document.createElement('div');
     grid.className = 'cgrid';
     for (let i = 0; i < CAP; i++) {
-      const p = cam.pedidos[i];
-      const c = document.createElement('div');
-      if (p) {
-        const u = p.urgencia && p.urgencia.toUpperCase().includes('URG');
-        c.className = `can ${u ? 'cu' : 'cn'}`;
-        const nom = p.cliente.length > 5 ? p.cliente.substring(0, 5) : p.cliente;
-        c.innerHTML = `<span class="cn2">${i+1}</span><span class="ccli">${nom}</span>`;
+      const c = cam.clientes[i];
+      const el = document.createElement('div');
+      if (c) {
+        const u = c.urgencia && c.urgencia.toUpperCase().includes('URG');
+        el.className = `can ${u ? 'cu' : 'cn'}`;
+        const nom = c.cliente.length > 5 ? c.cliente.substring(0, 5) : c.cliente;
+        el.innerHTML = `<span class="cn2">${i+1}</span><span class="ccli">${nom}</span>`;
       } else {
-        c.className = 'can cv';
-        c.innerHTML = `<span class="cn2">—</span>`;
+        el.className = 'can cv';
+        el.innerHTML = `<span class="cn2">—</span>`;
       }
-      grid.appendChild(c);
+      grid.appendChild(el);
     }
     sec.appendChild(grid);
     sec.innerHTML += `<div class="fondo-lbl">FONDO (última entrega) →</div>`;
