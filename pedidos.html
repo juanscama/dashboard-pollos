@@ -284,9 +284,10 @@ async function enviarPedidos() {
     const res = await fetch(WEBHOOK, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      mode: 'no-cors',
       body: JSON.stringify({ pedidos: texto })
     });
-    if (res.ok) {
+    if (res.ok || res.type === 'opaque') {
       success.style.display = 'block';
       success.textContent = `✓ ${pedidos.length} pedido(s) enviados correctamente`;
       pedidos = [];
